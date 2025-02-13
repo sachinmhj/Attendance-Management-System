@@ -1,0 +1,12 @@
+{% extends 'users/base/base.html' %}
+{% block title %}Assigned Teachers{% endblock %}
+{% block body %}
+<div class="container">
+    <h1 class="text-center my-3 py-2">Assigned Teachers for your Grade</h1>
+    {% for teach in assignedteach %}
+    <div class="text-center w-25 m-auto p-2 border border-2 border-dark rounded bg-secondary text-light my-4">
+        {{ teach.username }}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

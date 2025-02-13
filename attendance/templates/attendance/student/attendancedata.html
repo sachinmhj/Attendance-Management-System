@@ -1,0 +1,43 @@
+{% extends 'users/base/base.html' %}
+{% block title %}My Attendance Data{% endblock %}
+{% block body %}
+<div class="container">
+    <h1 class="text-center my-3 py-2">My Attendance Data</h1>
+    <!-- {% if student.user_attendance.all %}
+        {% for attendance in student.user_attendance.all %}
+        {{attendance.todaydate}}
+        {{attendance.is_present}}
+        {{attendance.taken_by}}
+        {% endfor %}
+    {% endif %} -->
+    
+        <table class="table table-hover table-secondary text-center">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Attendance Status</th>
+                    <th scope="col">Taken By</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if student.user_attendance.all %}
+                {% for attendance in student.user_attendance.all %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{attendance.todaydate}}</td>
+                    <td>{% if attendance.is_present %}Present{% else %}Absent{% endif %}</td>
+                    <td>{{attendance.taken_by.username}}</td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+        <div class="text-center">
+            <form action="" method="post">
+                {% csrf_token %}
+                <button class='btn btn-secondary' type="submit">Download PDF</button>
+            </form>
+        </div>
+</div>
+{% endblock %}

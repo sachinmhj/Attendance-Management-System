@@ -1,0 +1,12 @@
+{% extends 'users/base/base.html' %}
+{% block title %}Attendance - Select Grade{% endblock %}
+{% block body %}
+<div class="container">
+    <h1 class="text-center my-4 p-2">Check Students History For:</h1><hr> 
+    {% for gd in assigned_grades %}
+    <div class="text-center my-2 m-auto p-2">
+        <a href="{% url 'studentsattendancehistory' gd.grade_level %}" class="btn btn-secondary btn-lg">Grade {{gd.grade_level}}</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

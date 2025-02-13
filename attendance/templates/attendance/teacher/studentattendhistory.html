@@ -1,0 +1,66 @@
+{% extends 'users/base/base.html' %}
+{% block title %}User Attendance Data{% endblock %}
+{% block body %}
+
+{% if messages %}
+{% for msg in messages %}
+<div class="text-center bg-secondary text-light py-1">
+    {{ msg }}
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="container">
+    <!-- {% for student in allstudents %}
+        {% for stu in student.user_attendance.all %}
+            {{ student.username }}
+            {{ stu.todaydate }}
+            {{ stu.is_present }}
+            {{ stu.taken_by }}
+        {% endfor %}
+    {% endfor %} -->
+    <div class="d-flex">
+        <div class="container border m-2 mt-4 rounded bg-secondary">
+            <h1 class="text-center my-4 p-2">Student Attendance History</h1>
+            <hr>
+            <table class="table table-hover table-secondary text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">Student ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Attendance Status</th>
+                        <th scope="col">Taken By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for student in allstudents %}
+                    {% for stu in student.user_attendance.all %}
+                        <tr>
+                            <th scope="row">{{student.pk}}</th>
+                            <td>{{ student.username }}</td>
+                            <td>{{ stu.todaydate }}</td>
+                            <td>{% if stu.is_present %}Present{% else %}Absent{% endif %}</td>
+                            <td>{{ stu.taken_by.username }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="container w-25 border m-2 mt-4 rounded bg-secondary">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <h5 class="text-center mt-4">Attendance for specific date</h5><hr>
+                <div class="text-center">
+                    <input type="date" name="date" placeholder="YYYY-MM-DD">
+                    <div class="text-center my-3">
+                        <button class='btn btn-outline-light btn-sm my-1' type="submit" name="viewdata">View Data</button>
+                        <button class='btn btn-outline-light btn-sm my-1' type="submit" name="downloadxl">Download Excel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'users/base/base.html' %}
+{% block title %}MySite - Change Info{% endblock %}
+{% block style %}
+body{
+    background: url('/static/img/natural1.jpeg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    color: white;
+}
+input{
+    text-align: center;
+    color: black;
+}
+a, #id_user_image{
+    color: white;
+}
+{% endblock %}
+{% block body %}
+<div class="container text-center">
+    <h1 class="text-center my-3 py-2">Edit Info</h1>
+    <form action="" method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        {{createform.non_field_errors|striptags}}
+        {% for fm in editform %}
+        {% if fm.field.widget.input_type == 'file' %}
+        <div class="my-2 py-2">
+            <div class="my-1">
+                {{fm.label_tag}}
+            </div>
+            <img src="{{fm.value.url}}" alt="" style="width: 3%;" class="rounded my-2">
+            <div class="my-2">
+                {{fm}}
+            </div>
+            {{fm.errors|striptags}}
+        </div>
+        {% else %}
+        <div class="my-2 py-2">
+            <div class="my-1">
+                {{fm.label_tag}}
+            </div>
+            <div class="my-1">
+                {{fm}}
+            </div>
+            {{fm.errors|striptags}}
+        </div>
+        {% endif %}
+        {% endfor %}
+        <div class="my-2 py-2">
+            <button type="submit" class="btn btn-outline-light">Edit Now</button>
+            <a href="{% url 'dashboardpage' request.user.user_slug %}" class="btn btn-outline-light">Go Back</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

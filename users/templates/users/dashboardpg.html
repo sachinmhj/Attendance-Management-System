@@ -1,0 +1,59 @@
+{% extends 'users/base/base.html' %}
+{% block title %}MySite - Dashboard{% endblock %}
+{% block style %}
+body{
+    background: url('/static/img/natural1.jpeg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    color: white;
+}
+.ct-box{
+    width: 50%;
+    background-color: #6f8685;
+    border-radius: 2rem;
+}
+{% endblock %}
+{% block body %}
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="container text-center ct-box">
+        <h1 class="text-center my-2 py-2 text-dark">User Info</h1>
+        <div class="text-center my-2 py-2">
+            <div class="my-3">Profile</div>
+            <img src="{{ reguser.user_image.url }}" alt="No Image" class="w-25 rounded">
+        </div>
+        <div class="text-center my-2 py-2">
+            ID:
+            {{reguser.pk}}
+        </div>
+        <div class="text-center my-2 py-2">
+            Username:
+            {{reguser.username}}
+        </div>
+        <div class="text-center my-2 py-2">
+            First Name:
+            {{reguser.first_name|default:'N/A'}}
+        </div>
+        <div class="text-center my-2 py-2">
+            Last Name:
+            {{reguser.last_name|default:'N/A'}}
+        </div>
+        <div class="text-center my-2 py-2">
+            Email:
+            {{reguser.email|default:'N/A'}}
+        </div>
+        <div class="text-center my-2 py-2">
+            Role:
+            {{reguser.role}}
+        </div>
+        <div class="text-center my-2 py-2">
+            DOB:
+            {{reguser.date_of_birth|default:'N/A'}}
+        </div>
+        <div class="my-2 py-2">
+            <a href="{% url 'editprofile' %}" class="btn btn-dark text-info">Edit Profile</a>
+            <a href="{% url 'index' %}" class="btn btn-dark text-info">Goto Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

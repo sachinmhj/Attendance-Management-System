@@ -1,0 +1,61 @@
+{% extends 'users/base/base.html' %}
+{% block title %}Attendance - Take Attendance{% endblock %}
+{% block css %}
+th,td{
+align-items: center;
+}
+{% endblock %}
+{% block body %}
+{% if messages %}
+{% for message in messages %}
+<div class="bg-secondary text-light text-center p-2">
+    {{ message.tags|capfirst }}!!!
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+{% if students %}
+<div class="container">
+    <h1 class="text-center my-4 p-2">Take Attendance</h1>
+    <hr>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="container">
+
+            <table class="table table-hover table-secondary text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Roll No</th>
+                        <th scope="col">Attendance Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{student.username}}</td>
+                        <td>{{student.student_roll}}</td>
+                        <td>
+                            <div class="form-check form-check-lg d-flex justify-content-center">
+                                <input class="form-check-input border border-dark" type="checkbox" name="{{student.user_slug}}">
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" class="btn btn-secondary d-block m-auto my-4 p-2">Take Attendance</button>
+    </form>
+</div>
+{% else %}
+<div class="container text-center my-4 p-4">
+    There are currently no students assigned to this grade.
+</div>
+<div class="my-2 py-2 text-center">
+    <a href="{% url 'allstudent' %}" class="btn btn-dark text-info">Back</a>
+</div>
+{% endif %}
+{% endblock %}

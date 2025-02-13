@@ -1,0 +1,32 @@
+{% extends 'users/base/base.html' %}
+{% block title %}Select Role{% endblock %}
+{% block style %}
+body{
+    background: url('/static/img/surendra3.jpeg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    color: white;
+}
+input{
+    text-align: center;
+    color: black;
+}
+#id_user_image{
+    color: white;
+}
+{% endblock %}
+{% block body %}
+<div class="container text-center">
+    <h1 class="text-center my-3 py-2">Please select your role to proceed: </h1><hr>
+    <div class='my-3 p-3'>
+        <a href="{% url 'registerpage' 'student' %}" class='btn btn-light btn-lg'>Student</a>
+    </div>
+    <div class='my-3 p-3'>
+        <a href="{% url 'registerpage' 'teacher' %}" class='btn btn-light btn-lg'>Teacher</a>
+    </div>
+    <div class='my-3 p-3'>
+        <a href="{% url 'registerpage' 'admin' %}" class='btn btn-light btn-lg'>Admin</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'users/base/base.html' %}
+{% block title %}MySite{% endblock %}
+{% block style %}
+.home-text{
+    height: 90vh;
+}
+h1{
+    font-size: 4rem;
+    color: black;
+}
+body{
+    background: url('/static/img/nature.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+}
+{% endblock %}
+{% block body %}
+
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            // Note: TAKEN FROM STACKOVERFLOW
+            document.addEventListener('DOMContentLoaded', function() {
+                swal("{{ message.level_tag|capfirst }}", "{{ message }}", "{{ message.level_tag }}");
+            });
+        </script>
+    {% endfor %}
+{% endif %}
+
+<div class="d-flex home-text justify-content-center align-items-center">
+    <h1>Welcome To MySite</h1>
+</div>
+<script>
+    swal("Here's the title!", "...and here's the text!");
+</script>
+{% endblock %}

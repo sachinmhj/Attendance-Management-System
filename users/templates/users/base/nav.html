@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
+
+  <div class="container-fluid">
+    <a class="navbar-brand mx-2" href="{% url 'index' %}">MySite</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item mx-3">
+          <a class="nav-link" aria-current="page" href="{% url 'index' %}">Home</a>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-item mx-3">
+          <a class="nav-link" href="{% url 'dashboardpage' request.user.user_slug %}">Dashboard</a>
+        </li>
+        {% endif %}
+        {% if request.user.is_authenticated and request.user.role == 'student' %}
+        <li class="nav-item mx-3">
+          <a class="nav-link" href="{% url 'attendancehistory' request.user.user_slug %}">Attendance Data</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link" href="{% url 'teachersassgined' %}">Assigned Teachers</a>
+        </li>
+        {% endif %}
+        {% if request.user.is_authenticated and request.user.role == 'teacher' %}
+        <li class="nav-item mx-3">
+          <a class="nav-link" href="{% url 'selectgradeattend' %}">Take Attendance</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link" href="{% url 'selectattendancehistory' %}">Attendance History</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link" href="{% url 'allstudent' %}">Students</a>
+        </li>
+        {% endif %}
+        {% if not request.user.is_authenticated %}
+        <li class="nav-item mx-3">
+          <a class="nav-link" href="{% url 'selectrole' %}">Register</a>
+        </li>
+        {% endif %}
+        {% if not request.user.is_authenticated %}
+        <li class="nav-item mx-3">
+          <a class="nav-link" href="{% url 'loginpage' %}">Login</a>
+        </li>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+        <li class="nav-item mx-3">
+          <a class="nav-link" href="{% url 'logoutpage' %}">Logout</a>
+        </li>
+        {% endif %}
+      </ul>
+      {% if not request.user.is_authenticated %}
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-light" type="submit">Search</button>
+      </form>
+      {% else %}
+      <a class="btn btn-outline-info mx-3" href="{% url 'changepw' %}">Change Password</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>

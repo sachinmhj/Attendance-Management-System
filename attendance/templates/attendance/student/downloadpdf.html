@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Download Pdf</title>
+    <style>
+        body, h1, table {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+            font-size: 16px;
+        }
+        h1 {
+            text-align: center;
+            color: #0056b3;
+        }
+        .table-container {
+            max-width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+        table th, table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        table th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <h1>My Attendance Data</h1>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Attendance Status</th>
+                    <th>Taken By</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if student.user_attendance.all %}
+                    {% for attendance in student.user_attendance.all %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ attendance.todaydate }}</td>
+                            <td>{% if attendance.is_present %}Present{% else %}Absent{% endif %}</td>
+                            <td>{{ attendance.taken_by.username }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="4">No attendance data available.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

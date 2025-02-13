@@ -1,0 +1,62 @@
+{% extends 'users/base/base.html' %}
+{% block title %}MySite - Login{% endblock %}
+{% block style %}
+body{
+    background: url('/static/img/surendra3.jpeg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    color: white;
+}
+input{
+    text-align: center;
+    color: black;
+}
+#id_user_image{
+    color: white;
+}
+#id_assigned_classes{
+    text-align: center;
+    border-radius: 1rem;
+    width: 10%;
+}
+{% endblock %}
+{% block body %}
+<div class="container text-center">
+    <h1 class="text-center my-3 py-2">Register Form</h1>
+    <form action="" method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        {{createform.non_field_errors|striptags}}
+        {% for fm in createform %}
+        {% if not fm.is_hidden %}
+        <div class="my-2 py-2">
+            <div class="my-1">
+                {{fm.label_tag}}
+            </div>
+            <div class="my-1">
+                {{fm}}
+            </div>
+            {{fm.errors|striptags}}
+        </div>
+        {% endif %}
+        {% endfor %}
+        <div class="my-2 py-2">
+            <button type="submit" class="btn btn-outline-light">Register Now</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+<!-- {% block js %}
+document.getElementById('id_role').addEventListener('change', function(){
+    a = document.getElementById('id_role')
+    if(a.value == "student"){
+        console.log("stud")
+    }
+    else if(a.value == "teacher"){
+        console.log("teach")
+    }
+    else{
+        console.log("admn")
+    }
+})
+{% endblock %} -->

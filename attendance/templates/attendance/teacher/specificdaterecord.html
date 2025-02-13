@@ -1,0 +1,36 @@
+{% extends 'users/base/base.html' %}
+{% block title %}Attendance - Select Grade{% endblock %}
+{% block body %}
+<div class="container">
+    <h1 class="text-center my-4 p-2">Student Attendance Data - {{fulldate}}</h1>
+    <hr>
+    <table class="table table-hover table-secondary text-center">
+        <thead>
+            <tr>
+                <th scope="col">S.N</th>
+                <th scope="col">Name</th>
+                <th scope="col">Grade</th>
+                <th scope="col">Date</th>
+                <th scope="col">Attendance Status</th>
+                <th scope="col">Taken_by</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for student in specificdate %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ student.user.username }}</td>
+                <td>{{ student.student_grade_level }}</td>
+                <td>{{ student.todaydate }}</td>
+                <td>{% if student.is_present %}Present{% else %}Absent{% endif %}</td>
+                <td>{{ student.taken_by.username }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="my-2 py-2 text-center">
+        <button class="btn btn-secondary" onclick="window.history.back()">Back</button>
+    </div>
+</div>
+{% endblock %}

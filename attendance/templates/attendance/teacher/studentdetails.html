@@ -1,0 +1,42 @@
+{% extends 'users/base/base.html' %}
+{% block title %}User Attendance Data{% endblock %}
+{% block body %}
+<div class="container">
+    <h1 class="text-center my-2 py-2">Student Detail</h1>
+    <div class="text-center my-2 py-2">
+        <div class="my-3">Profile</div>
+        <img src="{{ stu.user_image.url }}" alt="No Image" class="w-25 rounded">
+    </div>
+    <div class="text-center my-2 py-2">
+        Username:
+        {{stu.username}}
+    </div>
+    <div class="text-center my-2 py-2">
+        First Name:
+        {{stu.first_name|default:'N/A'}}
+    </div>
+    <div class="text-center my-2 py-2">
+        Last Name:
+        {{stu.last_name|default:'N/A'}}
+    </div>
+    <div class="text-center my-2 py-2">
+        Email:
+        {{stu.email|default:'N/A'}}
+    </div>
+    <div class="text-center my-2 py-2">
+        Roll Number:
+        {{stu.student_roll}}
+    </div>
+    <div class="text-center my-2 py-2">
+        Grade:
+        {{stu.student_class}}
+    </div>
+    <div class="text-center my-2 py-2">
+        DOB:
+        {{stu.date_of_birth|default:'N/A'}}
+    </div>
+    <div class="my-2 py-2 text-center">
+        <a href="{% url 'allstudent' %}" class="btn btn-dark text-info">Back</a>
+    </div>
+</div>
+{% endblock %}
